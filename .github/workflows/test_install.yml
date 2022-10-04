@@ -1,0 +1,23 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - uses: actions/checkout@v3
+      - name: Install
+        run: sudo make
+      - name: Test
+        run: sudo ./venv/bin/python3 ftpserver.py -t

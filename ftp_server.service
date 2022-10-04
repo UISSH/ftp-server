@@ -1,0 +1,13 @@
+[Unit]
+Description=ftp server, it is managed by uissh.
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/usr/local/uissh/ftp-server
+ExecStart=/usr/local/uissh/ftp-server/venv/bin/python3 ftpserver.py --config config.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

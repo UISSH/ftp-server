@@ -1,0 +1,7 @@
+/config.json
+/key.pem
+/cert.pem
+/venv
+/.idea
+.passwd-s3fs/s3
+**__pycache__**
