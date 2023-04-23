@@ -47,6 +47,7 @@ def load_s3(authorizer: DummyAuthorizer, data: dict):
     
     if DEBUG:
         cmd += ' -o dbglevel=info -f -o curldbg'
+        logging.debug(f'cmd: {cmd}')
         
     Thread(target=os.system, args=(cmd,)).start()
     add_user(authorizer, data, base_path)
