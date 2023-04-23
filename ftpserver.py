@@ -9,7 +9,7 @@ import logging
 
 from pyftpdlib.authorizers import DummyAuthorizer
 
-from src.ftp_server.s3 import load_s3
+from src.ftp_server.s3 import cleanup_s3, load_s3
 from src.ftp_server.os import load_os
 
 from pyftpdlib.servers import FTPServer
@@ -87,3 +87,7 @@ if __name__ == '__main__':
             f"ftp-server: configuration file {CONFIG_PATH} test is successful")
         exit(0)
     server.serve_forever()
+    
+    # cleanup
+    cleanup_s3()
+    

@@ -7,6 +7,8 @@ from src.ftp_server.helper import add_user
 
 DEBUG = os.environ.get('debug', False)
 
+MOUNT_POINT_LIST = [] 
+
 def load_s3(authorizer: DummyAuthorizer, data: dict):
     """
     :param authorizer
@@ -37,6 +39,9 @@ def load_s3(authorizer: DummyAuthorizer, data: dict):
     
     
     os.system(f'mkdir -p {base_path}')
+    
+    MOUNT_POINT_LIST.append(base_path)
+    
     cmd = f's3fs {bucket} {base_path} -o passwd_file={passwd} -o use_cache=/tmp'
     
     if DEBUG:
@@ -44,3 +49,9 @@ def load_s3(authorizer: DummyAuthorizer, data: dict):
         
     Thread(target=os.system, args=(cmd,)).start()
     add_user(authorizer, data, base_path)
+
+def cleanup_s3():
+    for mount_point in MOUNT_POINT_LIST:
+        print(f'umount {mount_point}')
+        os.system(f'fusermount -u {mount_point}')
+ 
