@@ -52,7 +52,15 @@ def load_s3(authorizer: DummyAuthorizer, data: dict):
     add_user(authorizer, data, base_path)
 
 def cleanup_s3():
+    
     for mount_point in MOUNT_POINT_LIST:
         logging.debug(f'umount {mount_point}')
         os.system(f'fusermount -u {mount_point}')
+   
+        if not os.listdir(mount_point):
+            # remove empty directory
+            logging.debug(f'remove {mount_point}')
+            os.rmdir(mount_point)
+            
+   
  
