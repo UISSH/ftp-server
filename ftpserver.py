@@ -59,6 +59,7 @@ def get_server() -> FTPServer:
         from pyftpdlib.handlers import FTPHandler
         handler = FTPHandler
     handler.authorizer = authorizer
+    handler.passive_ports = range(60000, 65535)
     address = CONFIG.get('listen_address', '127.0.0.1:2121').split(":")
 
     return FTPServer(tuple(address), handler)
@@ -69,6 +70,7 @@ def init() -> FTPServer:
 
 
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser(description=f'Ftp server.')
     parser.add_argument("--config", type=str,
                         required=False, help="config.json")

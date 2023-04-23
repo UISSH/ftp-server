@@ -1,3 +1,4 @@
+import logging
 import os
 from threading import Thread
 
@@ -52,6 +53,6 @@ def load_s3(authorizer: DummyAuthorizer, data: dict):
 
 def cleanup_s3():
     for mount_point in MOUNT_POINT_LIST:
-        print(f'umount {mount_point}')
+        logging.debug(f'umount {mount_point}')
         os.system(f'fusermount -u {mount_point}')
  

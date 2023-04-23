@@ -2,8 +2,8 @@
   "version": 1,
   "listen_address": "0.0.0.0:21",
   "passive_transfer_port_range": {
-    "start": 2122,
-    "end": 2130
+    "start": 60000,
+    "end": 65535
   },
   "tls": {
     "server_cert": {

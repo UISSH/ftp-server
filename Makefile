@@ -12,3 +12,4 @@ install:
 	ln -s /lib/systemd/system/ftp-server.service  /etc/systemd/system/ftp-server.service
 	systemctl daemon-reload
 	systemctl enable --now ftp-server
+	ufw allow from any to any proto tcp port 60000:65535
