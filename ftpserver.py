@@ -19,7 +19,8 @@ CONFIG = {}
 
 CONFIG_PATH = pathlib.Path(__file__).parent / 'config.json'
 DEBUG = os.environ.get('debug', False)
-
+if DEBUG:
+    logging.basicConfig(level=logging.DEBUG)
 
 LOAD_METHOD = {'s3': load_s3, 'os': load_os}
 
